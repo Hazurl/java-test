@@ -13,5 +13,9 @@ public class Autocar extends Camion {
         this.seat_count = seat_count_;
     }
 
+    public int get_rent_price() {
+        return super.get_rent_price() + (seat_count > 40 ? 50 : 0);
+    }
+
     
 }
