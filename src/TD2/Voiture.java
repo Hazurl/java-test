@@ -13,4 +13,13 @@ public class Voiture extends Vehicule {
         this.auto_radio = auto_radio_;
     }
 
+    public void print() {
+        super.print();
+        if(this.auto_radio)
+            System.out.print(" Has an auto radio.");
+        else
+            System.out.print(" Without an auto radio.");
+    }
+
+
 }

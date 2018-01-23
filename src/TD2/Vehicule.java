@@ -33,4 +33,9 @@ public class Vehicule {
             return prix / 250;
     }
 
+    public void print() {
+        System.out.print(this.modele + " [" + this.immatriculation + "] bought in " + this.annee_achat +
+                         " at " + this.prix + "€ and require permit " + this.permis + ".");
+    }
+
 }
