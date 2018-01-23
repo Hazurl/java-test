@@ -5,6 +5,13 @@ package TD2;
  */
 public class Autocar extends Camion {
 
-    public int seat_count; 
+    private int seat_count; 
+
+    public Autocar(String modele_, int annee_achat_, int prix_, String immatriculation_,
+                   String permis_, float volume_, int seat_count_) {
+        super(modele_, annee_achat_, prix_, immatriculation_, permis_, volume_);
+        this.seat_count = seat_count_;
+    }
+
     
 }

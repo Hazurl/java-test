@@ -8,11 +8,19 @@ import java.util.Calendar;
  */
 public class Vehicule {
 
-    public String modele;
-    public int annee_achat;
-    public int prix;
-    public String immatriculation;
-    public String permis;
+    private String modele;
+    private int annee_achat;
+    private int prix;
+    private String immatriculation;
+    private String permis;
+
+    public Vehicule(String modele_, int annee_achat_, int prix_, String immatriculation_, String permis_) {
+        this.modele = modele_;
+        this.annee_achat = annee_achat_;
+        this.prix = prix_;
+        this.immatriculation = immatriculation_;
+        this.permis = permis_;
+    }
 
     public int age() {
         return Year.now().getValue() - this.annee_achat;
