@@ -15,7 +15,7 @@ public class Camion extends Vehicule {
 
     public void print() {
         super.print();
-        System.out.print(" Volume of " + volume + ".");
+        System.out.print(" Volume of " + this.volume + ".");
     }
 
 }

@@ -14,12 +14,12 @@ public class Autocar extends Camion {
     }
 
     public int get_rent_price() {
-        return super.get_rent_price() + (seat_count > 40 ? 50 : 0);
+        return super.get_rent_price() + (this.seat_count > 40 ? 50 : 0);
     }
 
     public void print() {
         super.print();
-        System.out.print(" " + seat_count + " seats available.");
+        System.out.print(" " + this.seat_count + " seats available.");
     }
     
 }

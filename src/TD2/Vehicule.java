@@ -28,9 +28,9 @@ public class Vehicule {
 
     public int get_rent_price() {
         if (this.age() <= 1)
-            return prix / 200;
+            return this.prix / 200;
         else
-            return prix / 250;
+            return this.prix / 250;
     }
 
     public void print() {
