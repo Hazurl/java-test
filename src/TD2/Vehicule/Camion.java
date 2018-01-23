@@ -1,4 +1,4 @@
-package TD2;
+package TD2.Vehicule;
 
 /**
  * Camion
