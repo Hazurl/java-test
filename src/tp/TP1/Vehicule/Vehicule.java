@@ -1,4 +1,4 @@
-package TD2.Vehicule;
+package tp.TP1.Vehicule;
 
 import java.time.Year;
 import java.util.Calendar;
@@ -12,18 +12,30 @@ public class Vehicule {
     private int annee_achat;
     private int prix;
     private String immatriculation;
-    private String permis;
+    private String permit;
 
-    public Vehicule(String modele_, int annee_achat_, int prix_, String immatriculation_, String permis_) {
+    public Vehicule(String modele_, int annee_achat_, int prix_, String immatriculation_, String permit_) {
         this.modele = modele_;
         this.annee_achat = annee_achat_;
         this.prix = prix_;
         this.immatriculation = immatriculation_;
-        this.permis = permis_;
+        this.permit = permit_;
     }
 
     public int age() {
         return Year.now().getValue() - this.annee_achat;
+    }
+
+    public String get_modele() {
+        return modele;
+    }
+
+    public String get_immatriculation() {
+        return immatriculation;
+    }
+
+    public String get_permit() {
+        return permit;
     }
 
     public int get_rent_price() {
@@ -35,7 +47,7 @@ public class Vehicule {
 
     public void print() {
         System.out.print(this.modele + " [" + this.immatriculation + "] bought in " + this.annee_achat +
-                         " at " + this.prix + "€ and require permit " + this.permis + ".");
+                         " at " + this.prix + "€ and require permit " + this.permit + ".");
     }
 
 }

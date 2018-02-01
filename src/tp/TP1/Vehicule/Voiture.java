@@ -1,4 +1,4 @@
-package TD2.Vehicule;
+package tp.TP1.Vehicule;
 
 /**
  * Voiture
@@ -11,6 +11,10 @@ public class Voiture extends Vehicule {
                    String immatriculation_, String permis_, boolean auto_radio_) {
         super(modele_, annee_achat_, prix_, immatriculation_, permis_);
         this.auto_radio = auto_radio_;
+    }
+
+    boolean has_auto_radio() {
+        return auto_radio;
     }
 
     public void print() {

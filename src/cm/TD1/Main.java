@@ -1,4 +1,6 @@
-package TD2.Vehicule;
+package cm.TD1;
+
+import cm.TD1.Vehicule.*;
 
 /**
  * Main
