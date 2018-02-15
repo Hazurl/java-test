@@ -32,4 +32,19 @@ public class Garage extends Agence {
         return super.personels_count() + this.mechanic_count;
     }
 
+    public int personels_not_admin_count() {
+        return super.personels_not_admin_count() + this.mechanic_count;
+    }
+
+    @Override
+    public void afficher() {
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Garage – Angers sud –­ 0241234567 –" 
+        + get_admin_count() + " adm – " + mechanic_count + "meca";
+    }
+
 }

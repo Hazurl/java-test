@@ -6,11 +6,23 @@ package cm.TD1.Vehicule;
 public class Voiture extends Vehicule {
 
     private boolean auto_radio;
+    private int id;
+
+    private static int next_id = 0;
 
     public Voiture(String modele_, int annee_achat_, int prix_, 
                    String immatriculation_, String permis_, boolean auto_radio_) {
         super(modele_, annee_achat_, prix_, immatriculation_, permis_);
         this.auto_radio = auto_radio_;
+        id = next_id++;
+    }
+
+    public final int get_id() {
+        return id;
+    }
+
+    public static void RAZ() {
+        next_id = 0;
     }
 
     public void print() {

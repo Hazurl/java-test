@@ -1,3 +1,5 @@
+SRC_DIR := scr/
+
 clean:
 	rm -rf ./build/
 	mkdir build
@@ -19,3 +21,9 @@ tp1:
 
 tp1-run:
 	java -cp build tp.TP1.Main
+
+package:
+	mkdir $(SRC)/$(name)
+
+class:
+	echo "test" > $(SRC)/$(name)/

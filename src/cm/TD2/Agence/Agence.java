@@ -3,7 +3,7 @@ package cm.TD2.Agence;
 /**
  * Agence
  */
-public class Agence {
+public abstract class Agence {
 
     private String name;
     private String phone_num;
@@ -38,6 +38,29 @@ public class Agence {
 
     public int personels_count() {
         return this.admin_count;
+    }
+
+    public int personels_not_admin_count() {
+        return 0;
+    }
+
+    public String get_name() {
+        return name;
+    }
+
+    public abstract void afficher();
+
+    public int categorie() {
+        int nb = personels_count();
+        if (nb > 19)
+            return 3;
+        if (nb > 9)
+            return 2;
+        return 1;
+    }
+
+    public Agence compareTo(Agence other) {
+        return other.personels_count() > personels_count() ? other : this;
     }
     
 }

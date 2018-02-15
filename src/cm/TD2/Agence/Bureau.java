@@ -41,6 +41,10 @@ public class Bureau extends Agence {
         return count;
     }
 
+    public int personels_not_admin_count() {
+        return super.personels_not_admin_count() + this.salesman_count;
+    }
+
     public boolean add_garage(Garage garage) {
         if (this.garages.size() < 4) {
             this.garages.add_element(garage);
@@ -59,6 +63,23 @@ public class Bureau extends Agence {
         return this.garages.size();
     }
 
-    
+    @Override
+    public void afficher() {
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Bureau de location – Angers – 0241123456 – " 
+        + get_admin_count() + " adm – " + salesman_count + " comm";
+    }
+
+    public void afficherGarages(int cat) {
+        System.out.println("Garage de catégorie >= " + cat + " du " + this);
+        for (Garage garage : garages) {
+            if (garage.categorie() >= cat)
+                System.out.println(garage);
+        }
+    }
 
 }
