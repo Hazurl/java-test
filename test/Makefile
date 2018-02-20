@@ -12,10 +12,19 @@ $(BUILD_DIR):
 	@mkdir ./$(BUILD_DIR)
 
 package: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
 	@echo "Creating package "$(pkg)"..."
 	@mkdir ./$(SRC_DIR)/$(pkg)
 
 class: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+ifndef name
+	$(error "Class's name not defined (use name='...')")
+endif
 	@echo "Creating class "$(name) "in package "$(pkg)"..."
 	@echo "package "$(pkg)";\n\n\
 	/*\n\
@@ -26,24 +35,50 @@ class: $(SRC_DIR) $(BUILD_DIR)
 	\t\n\
 	}" > ./$(SRC_DIR)/$(pkg)/$(name).java
 
-compile: $(SRC_DIR) $(BUILD_DIR)
-	@echo "Compiling package "$(pkg)"..."
-	@javac -d ./$(BUILD_DIR) ./$(SRC_DIR)/$(pkg)/*.java
+compile: $(SRC_DIR) $(BUILD_DIR) $(patsubst %.java, %.class, $(wildcard ./$(SRC_DIR)/$(pkg)/*.java))
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+
+%.class: $(SRC_DIR) $(BUILD_DIR) %.java
+	@echo "Compiling class "$(notdir $<)"..."
+	@javac -d ./$(BUILD_DIR) -cp ./$(BUILD_DIR) -cp ./$(SRC_DIR) $<
+
 
 $(BUILD_DIR)/%:
 	@make compile pkg=$*
 
 run: $(SRC_DIR) $(BUILD_DIR) $(BUILD_DIR)/$(pkg)
-	@java -cp ./$(BUILD_DIR) $(main)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+ifndef main
+	$(error "Main not defined (use main='...')")
+endif
+	@java -cp ./$(BUILD_DIR) $(pkg).$(main)
 
 clean: $(SRC_DIR) $(BUILD_DIR)
-	rm -rf ./$(BUILD_DIR)/$(pkg)
+ifndef pkg
+	@echo "Cleaning build folder..."
+else
+	@echo "Cleaning Package "$(pkg)"..."
+endif
+	@rm -rf ./$(BUILD_DIR)/$(pkg)
 
 again: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
 	@make clean pkg=$(pkg)
 	@make compile pkg=$(pkg)
 
 again-run: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+ifndef main
+	$(error "Main not defined (use main='...')")
+endif
 	@make clean pkg=$(pkg)
 	@make compile pkg=$(pkg)
-	@make run pkg=$(pkg) main=$(main)
+	@make run pkg=$(pkg) main=$(pkg).$(main)
