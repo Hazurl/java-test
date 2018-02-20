@@ -1,10 +1,9 @@
-package cm.TD1.Vehicule;
+package Vehicule;
 
-/**
- * Camion
+/*
+ *  Camion
  */
 public class Camion extends Vehicule {
-
     private float volume;
 
     public Camion(String modele_, int annee_achat_, int prix_, 
@@ -13,9 +12,16 @@ public class Camion extends Vehicule {
         this.volume = volume_;
     }
 
-    public void print() {
-        super.print();
-        System.out.print(" Volume of " + this.volume + ".");
+    public boolean can_transport(float volume) {
+        return volume <= this.volume;
+    }
+
+    public float max_volume() {
+        return volume;
+    }
+
+    public String ToString() {
+        return super.ToString() + " Volume of " + this.volume + ".";
     }
 
 }

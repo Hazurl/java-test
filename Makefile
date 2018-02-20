@@ -1,29 +1,84 @@
-SRC_DIR := scr/
+SRC_DIR := src
+BUILD_DIR := build
 
-clean:
-	rm -rf ./build/
-	mkdir build
+MAKEFLAGS += --no-print-directory
 
-cm1:
-	javac -d build ./src/cm/TD1/**/*.java ./src/cm/TD1/*.java
+all: $(SRC_DIR) $(BUILD_DIR)
 
-cm1-run:
-	java -cp build cm.TD1.Main
+$(SRC_DIR):
+	@mkdir ./$(SRC_DIR)
 
-cm2:
-	javac -d build ./src/cm/TD2/**/*.java ./src/cm/TD2/*.java
+$(BUILD_DIR):
+	@mkdir ./$(BUILD_DIR)
 
-cm2-run:
-	java -cp build cm.TD2.Main
+package: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+	@echo "Creating package "$(pkg)"..."
+	@mkdir ./$(SRC_DIR)/$(pkg)
 
-tp1:
-	javac -d build ./src/tp/TP1/**/*.java ./src/tp/TP1/*.java
+class: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+ifndef name
+	$(error "Class's name not defined (use name='...')")
+endif
+	@echo "Creating class "$(name) "in package "$(pkg)"..."
+	@echo "package "$(pkg)";\n\n\
+	/*\n\
+	 * " $(name)\
+	"\n\
+	 */\n\
+	public class" $(name) "{\n\
+	\t\n\
+	}" > ./$(SRC_DIR)/$(pkg)/$(name).java
 
-tp1-run:
-	java -cp build tp.TP1.Main
+compile: $(SRC_DIR) $(BUILD_DIR) $(patsubst %.java, %.class, $(wildcard ./$(SRC_DIR)/$(pkg)/*.java))
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
 
-package:
-	mkdir $(SRC)/$(name)
+%.class: %.java $(SRC_DIR) $(BUILD_DIR)
+	@echo "Compiling class "$(notdir $<)"..."
+	@javac -d ./$(BUILD_DIR) -cp ./$(BUILD_DIR) -cp ./$(SRC_DIR) $<
 
-class:
-	echo "test" > $(SRC)/$(name)/
+
+$(BUILD_DIR)/%:
+	@make compile pkg=$*
+
+run: $(SRC_DIR) $(BUILD_DIR) $(BUILD_DIR)/$(pkg)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+ifndef main
+	$(error "Main not defined (use main='...')")
+endif
+	@java -cp ./$(BUILD_DIR) $(pkg).$(main)
+
+clean: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	@echo "Cleaning build folder..."
+else
+	@echo "Cleaning Package "$(pkg)"..."
+endif
+	@rm -rf ./$(BUILD_DIR)/$(pkg)
+
+again: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+	@make clean pkg=$(pkg)
+	@make compile pkg=$(pkg)
+
+again-run: $(SRC_DIR) $(BUILD_DIR)
+ifndef pkg
+	$(error "Package's name not defined (use pkg='...')")
+endif
+ifndef main
+	$(error "Main not defined (use main='...')")
+endif
+	@make clean pkg=$(pkg)
+	@make compile pkg=$(pkg)
+	@make run pkg=$(pkg) main=$(pkg).$(main)
