@@ -1,4 +1,6 @@
-package cm.TD2.Agence;
+package Agence;
+
+import Structures.Ensemble;
 
 /**
  * Agence
@@ -9,7 +11,7 @@ public abstract class Agence {
     private String phone_num;
     private int admin_count;
 
-    Ensemble<String> comments;
+    private Ensemble<String> comments;
 
     public Agence() {
         this.admin_count = 0;

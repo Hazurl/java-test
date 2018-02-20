@@ -1,4 +1,4 @@
-package cm.TD2.Agence;
+package Compte;
 
 /**
  * CompteException

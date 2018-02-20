@@ -1,4 +1,4 @@
-package cm.TD2.Agence;
+package Structures;
 
 /**
  * IPile
@@ -7,7 +7,7 @@ public interface IPile<T> {
     
     void push(T object);
     T pop();
-    bool empty();
+    boolean empty();
     T top();
     
 }

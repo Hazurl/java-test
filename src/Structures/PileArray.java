@@ -1,15 +1,16 @@
-package cm.TD2.Agence;
+package Structures;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * PileArray
  */
 public class PileArray<T> implements Iterable<T>, IPile<T> {
 
-    private ArrayList objects;
+    private ArrayList<T> objects;
 
-    Pile(int initial_capacity) {
+    PileArray(int initial_capacity) {
         objects = new ArrayList<T>(initial_capacity);
     }
 
@@ -24,7 +25,7 @@ public class PileArray<T> implements Iterable<T>, IPile<T> {
     }
 
     @Override
-    public bool empty() {
+    public boolean empty() {
         return objects.isEmpty();
     }
 

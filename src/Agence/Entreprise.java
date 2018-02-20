@@ -1,4 +1,6 @@
-package cm.TD2.Agence;
+package Agence;
+
+import Structures.Ensemble;
 
 /**
  * Entreprise
