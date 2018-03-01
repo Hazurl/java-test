@@ -81,4 +81,4 @@ ifndef main
 endif
 	@make clean pkg=$(pkg)
 	@make compile pkg=$(pkg)
-	@make run pkg=$(pkg) main=$(pkg).$(main)
+	@make run pkg=$(pkg) main=$(main)
