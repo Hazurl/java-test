@@ -28,8 +28,10 @@ public class Equipe extends Thread {
             reflexion();
             if (isInterrupted())
                 return;
-            System.out.println(nom + " a pris " + t_reflexion + 
+            synchronized (System.out) {
+                System.out.println(nom + " a pris " + t_reflexion + 
                 "ms de reflexion puis à ajouter " + t_retard + "ms de retard");
+            }
             set_random_reflexion();
         }
     }

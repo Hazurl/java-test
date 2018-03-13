@@ -15,7 +15,9 @@ public class Simulation {
         securite.start();
 
         while(car.get_temps_restant() > 0) {
-            System.out.println(Math.round(car.get_temps_restant() / 1000.) + "...");
+            synchronized (System.out) {
+                System.out.println(Math.round(car.get_temps_restant() / 1000.) + "...");
+            }
             try {
                 Thread.sleep(1000);
             } catch(InterruptedException e) {}
