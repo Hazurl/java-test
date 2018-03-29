@@ -6,11 +6,13 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /*
@@ -126,33 +128,38 @@ public class Calculator extends JFrame implements ActionListener {
 
     public float evaluate(String str) {
         Stack<Float> stack = new Stack<Float>();
-        for(String s : str.split(" ")) {
-            try {
-                float f = Float.parseFloat(s);
-                stack.add(f);
-            } catch(NumberFormatException n) {
-                switch(s) {
-                    case "*":
-                        stack.add(stack.pop() * stack.pop());
-                        break;
-                    case "/":
-                        stack.add(stack.pop() / stack.pop());
-                        break;
-                    case "+":
-                        stack.add(stack.pop() + stack.pop());
-                        break;
-                    case "-":
-                        stack.add(stack.pop() - stack.pop());
-                        break;
-                    case "rac":
-                        stack.add((float)Math.sqrt(stack.pop()));
-                        break;
-                    case "inv":
-                        stack.add(1 / stack.pop());
-                        break;
+        try {
+            for(String s : str.split(" ")) {
+                try {
+                    float f = Float.parseFloat(s);
+                    stack.add(f);
+                } catch(NumberFormatException n) {
+                    switch(s) {
+                        case "*":
+                            stack.add(stack.pop() * stack.pop());
+                            break;
+                        case "/":
+                            stack.add(stack.pop() / stack.pop());
+                            break;
+                        case "+":
+                            stack.add(stack.pop() + stack.pop());
+                            break;
+                        case "-":
+                            stack.add(stack.pop() - stack.pop());
+                            break;
+                        case "rac":
+                            stack.add((float)Math.sqrt(stack.pop()));
+                            break;
+                        case "inv":
+                            stack.add(1 / stack.pop());
+                            break;
+                    }
                 }
-            }
-        }    
-        return stack.pop();    
+            }    
+            return stack.pop();    
+        } catch(EmptyStackException e) {
+            JOptionPane.showMessageDialog(this, "Error");
+            return 0;
+        }
     }
 }
